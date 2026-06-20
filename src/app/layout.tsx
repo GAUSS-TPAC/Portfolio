@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ScrollAnimations from "@/components/ScrollAnimations";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export const metadata: Metadata = {
     "Cameroun",
   ],
   authors: [{ name: "Alan Chanel Tchapda Pieme" }],
+  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
   openGraph: {
     title: "Alan Chanel Tchapda | Ingénieur Fintech · Fullstack · Data",
     description:
@@ -44,7 +46,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="bg-[#0a0a0f] text-slate-100 antialiased">{children}</body>
+      <body className="bg-[#0a0a0f] text-slate-100 antialiased">
+        <ScrollAnimations />
+        {children}
+      </body>
     </html>
   );
 }

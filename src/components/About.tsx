@@ -50,14 +50,14 @@ export default function About() {
   return (
     <section id="about" className="py-24 px-4 bg-slate-950/50">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 scroll-animate">
           <span className="text-violet-400 font-mono text-sm">// à propos</span>
           <h2 className="text-4xl font-bold text-white mt-2">Formation & Certifications</h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Education */}
-          <div>
+          <div className="scroll-animate scroll-animate-delay-1">
             <h3 className="text-lg font-semibold text-slate-300 mb-6 flex items-center gap-2">
               <span className="text-violet-400">🎓</span> Formation académique
             </h3>
@@ -93,7 +93,7 @@ export default function About() {
           </div>
 
           {/* Certifications */}
-          <div>
+          <div className="scroll-animate scroll-animate-delay-2">
             <h3 className="text-lg font-semibold text-slate-300 mb-6 flex items-center gap-2">
               <span className="text-cyan-400">🏅</span> Certifications
             </h3>

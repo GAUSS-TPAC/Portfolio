@@ -1,14 +1,5 @@
-const EmailIcon = () => (
-  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-  </svg>
-);
-
-const PhoneIcon = () => (
-  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-  </svg>
-);
+"use client";
+import { useState } from "react";
 
 const GithubIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -22,82 +13,201 @@ const LinkedinIcon = () => (
   </svg>
 );
 
-const contactLinks = [
-  {
-    label: "Email",
-    value: "alantchapda@gmail.com",
-    href: "mailto:alantchapda@gmail.com",
-    icon: <EmailIcon />,
-    external: false,
-  },
-  {
-    label: "Téléphone",
-    value: "+237 672 171 934",
-    href: "tel:+237672171934",
-    icon: <PhoneIcon />,
-    external: false,
-  },
+const socialLinks = [
   {
     label: "GitHub",
-    value: "github.com/GAUSS-TPAC",
+    value: "GAUSS-TPAC",
     href: "https://github.com/GAUSS-TPAC",
     icon: <GithubIcon />,
-    external: true,
   },
   {
     label: "LinkedIn",
-    value: "alan-tchapda-267981350",
+    value: "alan-tchapda",
     href: "https://linkedin.com/in/alan-tchapda-267981350",
     icon: <LinkedinIcon />,
-    external: true,
   },
 ];
 
+type Status = "idle" | "loading" | "success" | "error";
+
 export default function Contact() {
+  const [status, setStatus] = useState<Status>("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("loading");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      // Remplace YOUR_FORM_ID par ton ID Formspree (formspree.io → gratuit)
+      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <section id="contact" className="py-24 px-4">
-      <div className="max-w-3xl mx-auto text-center">
-        <span className="text-violet-400 font-mono text-sm">// contact</span>
-        <h2 className="text-4xl font-bold text-white mt-2 mb-4">
-          Travaillons Ensemble
-        </h2>
-        <p className="text-slate-400 mb-12 text-lg">
-          Disponible pour des projets freelance, des collaborations ou des opportunités
-          full-time en Fintech, IA ou développement logiciel.
-        </p>
-
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
-          {contactLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target={link.external ? "_blank" : undefined}
-              rel={link.external ? "noopener noreferrer" : undefined}
-              className="group flex flex-col items-center gap-3 p-5 rounded-2xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/40 hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="w-11 h-11 rounded-full bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 group-hover:bg-violet-500/20 transition-colors">
-                {link.icon}
-              </div>
-              <div>
-                <div className="text-white font-medium text-sm">{link.label}</div>
-                <div className="text-slate-500 text-xs mt-0.5 break-all leading-tight">{link.value}</div>
-              </div>
-            </a>
-          ))}
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-14 scroll-animate">
+          <span className="text-violet-400 font-mono text-sm">// contact</span>
+          <h2 className="text-4xl font-bold text-white mt-2 mb-3">
+            Travaillons Ensemble
+          </h2>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            Disponible pour des projets freelance, des collaborations ou des opportunités
+            full-time en Fintech, IA ou développement logiciel.
+          </p>
         </div>
 
-        <a
-          href="mailto:alantchapda@gmail.com"
-          className="inline-flex items-center gap-2 px-10 py-4 text-white font-semibold rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/30 hover:-translate-y-0.5"
-          style={{
-            background: "linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)",
-          }}
-        >
-          Envoyer un message
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {/* Left: info + social */}
+          <div className="scroll-animate scroll-animate-delay-1 space-y-6">
+            {/* Contact info */}
+            <div className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60">
+              <h3 className="text-slate-300 font-semibold mb-4">Coordonnées</h3>
+              <div className="space-y-3">
+                <a
+                  href="mailto:alantchapda@gmail.com"
+                  className="flex items-center gap-3 text-slate-400 hover:text-violet-400 transition-colors group"
+                >
+                  <span className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 group-hover:bg-violet-500/20 transition-colors">
+                    ✉
+                  </span>
+                  <span className="text-sm">alantchapda@gmail.com</span>
+                </a>
+                <a
+                  href="tel:+237672171934"
+                  className="flex items-center gap-3 text-slate-400 hover:text-cyan-400 transition-colors group"
+                >
+                  <span className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500/20 transition-colors">
+                    📞
+                  </span>
+                  <span className="text-sm">+237 672 171 934</span>
+                </a>
+                <div className="flex items-center gap-3 text-slate-500">
+                  <span className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center">📍</span>
+                  <span className="text-sm">Yaoundé, Cameroun — Mobilité & Remote</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Social links */}
+            <div className="flex gap-3">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center gap-3 p-4 rounded-xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/40 hover:-translate-y-0.5 transition-all duration-300 text-slate-400 hover:text-white"
+                >
+                  <div className="text-violet-400">{link.icon}</div>
+                  <div>
+                    <div className="text-white text-sm font-medium">{link.label}</div>
+                    <div className="text-slate-500 text-xs">{link.value}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            {/* Availability badge */}
+            <div className="flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/20">
+              <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse shrink-0" />
+              <p className="text-green-400 text-sm font-medium">
+                Disponible pour de nouveaux projets dès maintenant
+              </p>
+            </div>
+          </div>
+
+          {/* Right: contact form */}
+          <div className="scroll-animate scroll-animate-delay-2">
+            <form
+              onSubmit={handleSubmit}
+              className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60 space-y-4"
+            >
+              <h3 className="text-slate-300 font-semibold mb-2">Envoyer un message</h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs text-slate-500 mb-1.5 font-mono">Nom</label>
+                  <input
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="Votre nom"
+                    className="w-full px-3 py-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-200 placeholder-slate-600 text-sm focus:outline-none focus:border-violet-500/60 transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-slate-500 mb-1.5 font-mono">Email</label>
+                  <input
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="votre@email.com"
+                    className="w-full px-3 py-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-200 placeholder-slate-600 text-sm focus:outline-none focus:border-violet-500/60 transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs text-slate-500 mb-1.5 font-mono">Sujet</label>
+                <input
+                  name="subject"
+                  type="text"
+                  placeholder="Projet freelance, collaboration..."
+                  className="w-full px-3 py-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-200 placeholder-slate-600 text-sm focus:outline-none focus:border-violet-500/60 transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs text-slate-500 mb-1.5 font-mono">Message</label>
+                <textarea
+                  name="message"
+                  required
+                  rows={4}
+                  placeholder="Décrivez votre projet ou votre opportunité..."
+                  className="w-full px-3 py-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-200 placeholder-slate-600 text-sm focus:outline-none focus:border-violet-500/60 transition-colors resize-none"
+                />
+              </div>
+
+              {status === "success" && (
+                <div className="flex items-center gap-2 p-3 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm">
+                  ✓ Message envoyé ! Je vous répondrai très rapidement.
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+                  ✗ Une erreur s&apos;est produite. Écrivez-moi directement à alantchapda@gmail.com
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === "loading" || status === "success"}
+                className="w-full py-3 rounded-full text-white font-semibold text-sm transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/30 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
+                style={{
+                  background: "linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)",
+                }}
+              >
+                {status === "loading" ? "Envoi en cours..." : status === "success" ? "Envoyé ✓" : "Envoyer le message →"}
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -92,12 +92,12 @@ export default function Hero() {
             <span className="ml-2 inline-block group-hover:translate-x-1 transition-transform">→</span>
           </a>
           <a
-            href="/Alan_Tchapda_CV.pdf"
+            href="https://linkedin.com/in/alan-tchapda-267981350"
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-3 border border-violet-500/50 hover:border-violet-400 text-violet-400 hover:text-white font-semibold rounded-full transition-all duration-300 hover:bg-violet-500/10"
           >
-            Télécharger CV
+            Mon LinkedIn
           </a>
         </div>
       </div>

@@ -55,7 +55,7 @@ export default function Experience() {
                 <div className="md:w-1/2" />
 
                 <div
-                  className={`md:w-1/2 p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/30 transition-all duration-300 ${i % 2 === 0 ? "md:ml-8" : "md:mr-8"}`}
+                  className={`scroll-animate scroll-animate-delay-${i + 1} md:w-1/2 p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/30 transition-all duration-300 ${i % 2 === 0 ? "md:ml-8" : "md:mr-8"}`}
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div>

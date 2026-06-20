@@ -65,7 +65,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 scroll-animate">
           <span className="text-violet-400 font-mono text-sm">// compétences</span>
           <h2 className="text-4xl font-bold text-white mt-2">Stack Technique</h2>
           <p className="text-slate-400 mt-3 max-w-xl mx-auto">
@@ -75,10 +75,10 @@ export default function Skills() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {skillCategories.map((cat) => (
+          {skillCategories.map((cat, i) => (
             <div
               key={cat.title}
-              className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/40 hover:-translate-y-1 transition-all duration-300"
+              className={`scroll-animate scroll-animate-delay-${Math.min(i + 1, 4)} p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/40 hover:-translate-y-1 transition-all duration-300`}
             >
               <div className="flex items-center gap-3 mb-4">
                 <div

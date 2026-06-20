@@ -9,7 +9,6 @@ const projects = [
     company: "Gohze — Production",
     period: "2024 – Présent",
     github: "https://github.com/GAUSS-TPAC",
-    demo: "#",
   },
   {
     title: "Système d'Adressage Informel",
@@ -21,7 +20,6 @@ const projects = [
     company: "Yowyob — Production",
     period: "Déc. 2024 – Mars 2025",
     github: "https://github.com/GAUSS-TPAC",
-    demo: "#",
   },
   {
     title: "Protocole d'Annuaire LDAP / IAM",
@@ -33,7 +31,6 @@ const projects = [
     company: "Yowyob — Production",
     period: "2025",
     github: "https://github.com/GAUSS-TPAC",
-    demo: "#",
   },
 ];
 
@@ -43,30 +40,24 @@ const GithubIcon = () => (
   </svg>
 );
 
-const ExternalIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-  </svg>
-);
-
 export default function Projects() {
   return (
     <section id="projects" className="py-24 px-4 bg-slate-950/50">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 scroll-animate">
           <span className="text-violet-400 font-mono text-sm">// projets</span>
           <h2 className="text-4xl font-bold text-white mt-2">Projets en Production</h2>
           <p className="text-slate-400 mt-3 max-w-xl mx-auto">
-            Des solutions réelles déployées en production, couvrant l&apos;IoT, le Fullstack et la
-            sécurité des systèmes d&apos;information.
+            Des solutions réelles déployées en production, couvrant l&apos;IoT, le Fullstack et
+            la sécurité des systèmes d&apos;information.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {projects.map((project) => (
+          {projects.map((project, i) => (
             <div
               key={project.title}
-              className="group flex flex-col p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/40 hover:-translate-y-1 transition-all duration-300"
+              className={`scroll-animate scroll-animate-delay-${i + 1} group flex flex-col p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/40 hover:-translate-y-1 transition-all duration-300`}
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
@@ -84,19 +75,17 @@ export default function Projects() {
                     {project.title}
                   </h3>
                 </div>
-                <div className="flex gap-2 shrink-0 ml-2">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
-                  >
-                    <GithubIcon />
-                  </a>
-                </div>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 shrink-0 p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+                  title="Voir sur GitHub"
+                >
+                  <GithubIcon />
+                </a>
               </div>
 
-              {/* Company & period */}
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-xs text-slate-500 font-mono">{project.company}</span>
                 <span className="text-slate-700">·</span>
@@ -121,7 +110,7 @@ export default function Projects() {
           ))}
         </div>
 
-        <div className="text-center mt-10">
+        <div className="text-center mt-10 scroll-animate">
           <a
             href="https://github.com/GAUSS-TPAC"
             target="_blank"
