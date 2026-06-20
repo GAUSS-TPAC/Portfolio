@@ -1,42 +1,38 @@
 const projects = [
   {
-    title: "Système de Recommandation IA",
+    title: "TumCare — Monitoring Cardiaque",
     description:
-      "Moteur de recommandation basé sur le collaborative filtering et le content-based filtering, avec une API RESTful pour servir les prédictions en temps réel.",
-    tags: ["Python", "TensorFlow", "Flask", "PostgreSQL"],
-    type: "Machine Learning",
+      "Application mobile/web de suivi de santé cardiaque en temps réel. Pipeline d'ingestion IoT à base d'événements, moteur d'alertes à faible latence sur franchissement de seuil, base de données de séries temporelles et sécurité bancaire JWT/RBAC.",
+    tags: ["Flutter", "Django REST", "PostgreSQL", "WebSocket", "Docker"],
+    type: "Fullstack / IoT",
     accentColor: "#8b5cf6",
-    github: "https://github.com/alantchapda",
+    company: "Gohze — Production",
+    period: "2024 – Présent",
+    github: "https://github.com/GAUSS-TPAC",
     demo: "#",
   },
   {
-    title: "Dashboard Analytics Temps Réel",
+    title: "Système d'Adressage Informel",
     description:
-      "Tableau de bord interactif pour la visualisation de KPIs avec filtres dynamiques, export CSV et intégration de sources de données multiples.",
-    tags: ["React", "D3.js", "Node.js", "MongoDB"],
+      "Plateforme transactionnelle gérant 500+ entités en temps réel avec synchronisation d'état Redux. SSR Next.js < 200ms, pipeline CI/CD GitHub Actions + Docker réduisant le cycle de déploiement de 40%.",
+    tags: ["React", "Next.js", "Spring Boot", "Redux", "Docker", "CI/CD"],
     type: "Fullstack",
     accentColor: "#06b6d4",
-    github: "https://github.com/alantchapda",
+    company: "Yowyob — Production",
+    period: "Déc. 2024 – Mars 2025",
+    github: "https://github.com/GAUSS-TPAC",
     demo: "#",
   },
   {
-    title: "Pipeline de Données ETL",
+    title: "Protocole d'Annuaire LDAP / IAM",
     description:
-      "Pipeline de traitement de données à grande échelle avec orchestration Airflow, transformations dbt et stockage sur BigQuery en production.",
-    tags: ["Apache Spark", "Airflow", "GCP", "dbt"],
-    type: "Data Engineering",
+      "Système de gestion des identités & accès (IAM) hiérarchique inspiré des standards LDAP. Couche d'autorisation OAuth2 avec RBAC multi-tenant, gestion sécurisée des credentials et cycle de vie des tokens — aligné conformité KYC/AML.",
+    tags: ["Spring Boot", "Next.js", "JWT", "RBAC", "OAuth2"],
+    type: "Sécurité / IAM",
     accentColor: "#8b5cf6",
-    github: "https://github.com/alantchapda",
-    demo: "#",
-  },
-  {
-    title: "Chatbot NLP avec RAG",
-    description:
-      "Assistant conversationnel utilisant le Retrieval-Augmented Generation pour répondre à des questions sur des documents PDF avec mémoire conversationnelle.",
-    tags: ["LangChain", "OpenAI", "FastAPI", "Pinecone"],
-    type: "IA / NLP",
-    accentColor: "#06b6d4",
-    github: "https://github.com/alantchapda",
+    company: "Yowyob — Production",
+    period: "2025",
+    github: "https://github.com/GAUSS-TPAC",
     demo: "#",
   },
 ];
@@ -59,20 +55,21 @@ export default function Projects() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-violet-400 font-mono text-sm">// projets</span>
-          <h2 className="text-4xl font-bold text-white mt-2">Mes Réalisations</h2>
+          <h2 className="text-4xl font-bold text-white mt-2">Projets en Production</h2>
           <p className="text-slate-400 mt-3 max-w-xl mx-auto">
-            Projets couvrant l&apos;IA, le développement web et l&apos;ingénierie des données.
+            Des solutions réelles déployées en production, couvrant l&apos;IoT, le Fullstack et la
+            sécurité des systèmes d&apos;information.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {projects.map((project) => (
             <div
               key={project.title}
               className="group flex flex-col p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/40 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div>
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex-1">
                   <span
                     className="text-xs font-mono px-2 py-0.5 rounded-full"
                     style={{
@@ -83,28 +80,27 @@ export default function Projects() {
                   >
                     {project.type}
                   </span>
-                  <h3 className="text-white font-semibold text-lg mt-2">
+                  <h3 className="text-white font-semibold text-base mt-2 leading-tight">
                     {project.title}
                   </h3>
                 </div>
-                <div className="flex gap-2 shrink-0">
+                <div className="flex gap-2 shrink-0 ml-2">
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
-                    title="GitHub"
                   >
                     <GithubIcon />
                   </a>
-                  <a
-                    href={project.demo}
-                    className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
-                    title="Démo"
-                  >
-                    <ExternalIcon />
-                  </a>
                 </div>
+              </div>
+
+              {/* Company & period */}
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs text-slate-500 font-mono">{project.company}</span>
+                <span className="text-slate-700">·</span>
+                <span className="text-xs text-slate-600">{project.period}</span>
               </div>
 
               <p className="text-slate-400 text-sm leading-relaxed mb-4 flex-1">
@@ -127,7 +123,7 @@ export default function Projects() {
 
         <div className="text-center mt-10">
           <a
-            href="https://github.com/alantchapda"
+            href="https://github.com/GAUSS-TPAC"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 border border-violet-500/40 hover:border-violet-400 text-violet-400 hover:text-white font-medium rounded-full transition-all duration-300 hover:bg-violet-500/10"
