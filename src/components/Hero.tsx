@@ -92,12 +92,24 @@ export default function Hero() {
             <span className="ml-2 inline-block group-hover:translate-x-1 transition-transform">→</span>
           </a>
           <a
-            href="https://linkedin.com/in/alan-tchapda-267981350"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-3 border border-violet-500/50 hover:border-violet-400 text-violet-400 hover:text-white font-semibold rounded-full transition-all duration-300 hover:bg-violet-500/10"
+            href="/Alan_Tchapda_Fintech_Authentic_FR.docx.pdf"
+            download
+            className="flex items-center gap-2 px-8 py-3 border border-violet-500/50 hover:border-violet-400 text-violet-400 hover:text-white font-semibold rounded-full transition-all duration-300 hover:bg-violet-500/10"
           >
-            Mon LinkedIn
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            CV Français
+          </a>
+          <a
+            href="/Fullstack_Developer_Alan_Chanel_Tchapda_Pieme_CV(en).docx.pdf"
+            download
+            className="flex items-center gap-2 px-6 py-3 border border-slate-700/60 hover:border-cyan-500/50 text-slate-400 hover:text-cyan-400 font-medium rounded-full transition-all duration-300 hover:bg-cyan-500/5 text-sm"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            CV English
           </a>
         </div>
       </div>
