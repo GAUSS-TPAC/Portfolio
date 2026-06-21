@@ -45,7 +45,7 @@ export default function Projects() {
     <section id="projects" className="py-24 px-4 bg-slate-950/50">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 scroll-animate">
-          <span className="text-violet-400 font-mono text-sm">// projets</span>
+          <span className="text-violet-400 font-mono text-sm">{"// projets"}</span>
           <h2 className="text-4xl font-bold text-white mt-2">Projets en Production</h2>
           <p className="text-slate-400 mt-3 max-w-xl mx-auto">
             Des solutions réelles déployées en production, couvrant l&apos;IoT, le Fullstack et

@@ -34,7 +34,7 @@ export default function Experience() {
     <section id="experience" className="py-24 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-violet-400 font-mono text-sm">// expérience</span>
+          <span className="text-violet-400 font-mono text-sm">{"// expérience"}</span>
           <h2 className="text-4xl font-bold text-white mt-2">Parcours Professionnel</h2>
         </div>
 

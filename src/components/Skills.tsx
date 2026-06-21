@@ -66,7 +66,7 @@ export default function Skills() {
     <section id="skills" className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 scroll-animate">
-          <span className="text-violet-400 font-mono text-sm">// compétences</span>
+          <span className="text-violet-400 font-mono text-sm">{"// compétences"}</span>
           <h2 className="text-4xl font-bold text-white mt-2">Stack Technique</h2>
           <p className="text-slate-400 mt-3 max-w-xl mx-auto">
             De la conception d&apos;APIs sécurisées aux pipelines de données temps réel, en

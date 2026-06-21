@@ -61,7 +61,7 @@ export default function Contact() {
     <section id="contact" className="py-24 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14 scroll-animate">
-          <span className="text-violet-400 font-mono text-sm">// contact</span>
+          <span className="text-violet-400 font-mono text-sm">{"// contact"}</span>
           <h2 className="text-4xl font-bold text-white mt-2 mb-3">
             Travaillons Ensemble
           </h2>
