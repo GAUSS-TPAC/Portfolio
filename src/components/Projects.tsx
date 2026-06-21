@@ -1,38 +1,5 @@
-const projects = [
-  {
-    title: "TumCare — Monitoring Cardiaque",
-    description:
-      "Application mobile/web de suivi de santé cardiaque en temps réel. Pipeline d'ingestion IoT à base d'événements, moteur d'alertes à faible latence sur franchissement de seuil, base de données de séries temporelles et sécurité bancaire JWT/RBAC.",
-    tags: ["Flutter", "Django REST", "PostgreSQL", "WebSocket", "Docker"],
-    type: "Fullstack / IoT",
-    accentColor: "#8b5cf6",
-    company: "Gohze — Production",
-    period: "2024 – Présent",
-    github: "https://github.com/GAUSS-TPAC",
-  },
-  {
-    title: "Système d'Adressage Informel",
-    description:
-      "Plateforme transactionnelle gérant 500+ entités en temps réel avec synchronisation d'état Redux. SSR Next.js < 200ms, pipeline CI/CD GitHub Actions + Docker réduisant le cycle de déploiement de 40%.",
-    tags: ["React", "Next.js", "Spring Boot", "Redux", "Docker", "CI/CD"],
-    type: "Fullstack",
-    accentColor: "#06b6d4",
-    company: "Yowyob — Production",
-    period: "Déc. 2024 – Mars 2025",
-    github: "https://github.com/GAUSS-TPAC",
-  },
-  {
-    title: "Protocole d'Annuaire LDAP / IAM",
-    description:
-      "Système de gestion des identités & accès (IAM) hiérarchique inspiré des standards LDAP. Couche d'autorisation OAuth2 avec RBAC multi-tenant, gestion sécurisée des credentials et cycle de vie des tokens — aligné conformité KYC/AML.",
-    tags: ["Spring Boot", "Next.js", "JWT", "RBAC", "OAuth2"],
-    type: "Sécurité / IAM",
-    accentColor: "#8b5cf6",
-    company: "Yowyob — Production",
-    period: "2025",
-    github: "https://github.com/GAUSS-TPAC",
-  },
-];
+"use client";
+import { useLanguage } from "@/context/LanguageContext";
 
 const GithubIcon = () => (
   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -41,37 +8,34 @@ const GithubIcon = () => (
 );
 
 export default function Projects() {
+  const { t } = useLanguage();
+  const p = t.projects;
+
   return (
-    <section id="projects" className="py-24 px-4 bg-slate-950/50">
+    <section id="projects" className="py-24 px-4" style={{ backgroundColor: "var(--sect)" }}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 scroll-animate">
-          <span className="text-violet-400 font-mono text-sm">{"// projets"}</span>
-          <h2 className="text-4xl font-bold text-white mt-2">Projets en Production</h2>
-          <p className="text-slate-400 mt-3 max-w-xl mx-auto">
-            Des solutions réelles déployées en production, couvrant l&apos;IoT, le Fullstack et
-            la sécurité des systèmes d&apos;information.
-          </p>
+          <span className="text-violet-400 font-mono text-sm">{p.label}</span>
+          <h2 className="text-4xl font-bold text-[var(--t1)] mt-2">{p.title}</h2>
+          <p className="text-[var(--t2)] mt-3 max-w-xl mx-auto">{p.description}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {projects.map((project, i) => (
+          {p.data.map((project, i) => (
             <div
               key={project.title}
-              className={`scroll-animate scroll-animate-delay-${i + 1} group flex flex-col p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/40 hover:-translate-y-1 transition-all duration-300`}
+              className={`scroll-animate scroll-animate-delay-${i + 1} group flex flex-col p-6 rounded-2xl border hover:border-violet-500/40 hover:-translate-y-1 transition-all duration-300`}
+              style={{ backgroundColor: "var(--card)", borderColor: "var(--brdr)" }}
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
                   <span
                     className="text-xs font-mono px-2 py-0.5 rounded-full"
-                    style={{
-                      background: `${project.accentColor}20`,
-                      color: project.accentColor,
-                      border: `1px solid ${project.accentColor}40`,
-                    }}
+                    style={{ background: `${project.accentColor}20`, color: project.accentColor, border: `1px solid ${project.accentColor}40` }}
                   >
                     {project.type}
                   </span>
-                  <h3 className="text-white font-semibold text-base mt-2 leading-tight">
+                  <h3 className="text-[var(--t1)] font-semibold text-base mt-2 leading-tight">
                     {project.title}
                   </h3>
                 </div>
@@ -79,20 +43,21 @@ export default function Projects() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-2 shrink-0 p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
-                  title="Voir sur GitHub"
+                  className="ml-2 shrink-0 p-2 rounded-lg text-[var(--t2)] hover:text-[var(--t1)] transition-colors"
+                  style={{ backgroundColor: "var(--surf)" }}
+                  title="GitHub"
                 >
                   <GithubIcon />
                 </a>
               </div>
 
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs text-slate-500 font-mono">{project.company}</span>
-                <span className="text-slate-700">·</span>
-                <span className="text-xs text-slate-600">{project.period}</span>
+                <span className="text-xs text-[var(--t3)] font-mono">{project.company}</span>
+                <span className="text-[var(--t3)]">·</span>
+                <span className="text-xs text-[var(--t3)]">{project.period}</span>
               </div>
 
-              <p className="text-slate-400 text-sm leading-relaxed mb-4 flex-1">
+              <p className="text-[var(--t2)] text-sm leading-relaxed mb-4 flex-1">
                 {project.description}
               </p>
 
@@ -100,7 +65,8 @@ export default function Projects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-0.5 text-xs font-mono rounded bg-slate-800/70 text-slate-400 border border-slate-700/50"
+                    className="px-2 py-0.5 text-xs font-mono rounded text-[var(--t2)]"
+                    style={{ backgroundColor: "var(--surf)", border: "1px solid var(--brdr2)" }}
                   >
                     {tag}
                   </span>
@@ -117,7 +83,7 @@ export default function Projects() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 border border-violet-500/40 hover:border-violet-400 text-violet-400 hover:text-white font-medium rounded-full transition-all duration-300 hover:bg-violet-500/10"
           >
-            Voir plus sur GitHub →
+            {p.viewMore}
           </a>
         </div>
       </div>

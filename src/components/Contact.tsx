@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const GithubIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -13,45 +14,26 @@ const LinkedinIcon = () => (
   </svg>
 );
 
-const socialLinks = [
-  {
-    label: "GitHub",
-    value: "GAUSS-TPAC",
-    href: "https://github.com/GAUSS-TPAC",
-    icon: <GithubIcon />,
-  },
-  {
-    label: "LinkedIn",
-    value: "alan-tchapda",
-    href: "https://linkedin.com/in/alan-tchapda-267981350",
-    icon: <LinkedinIcon />,
-  },
-];
-
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function Contact() {
   const [status, setStatus] = useState<Status>("idle");
+  const { t } = useLanguage();
+  const c = t.contact;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
     const form = e.currentTarget;
     const data = new FormData(form);
-
     try {
-      // Remplace YOUR_FORM_ID par ton ID Formspree (formspree.io → gratuit)
-      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      const res = await fetch("https://formspree.io/f/xnjkablp", {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },
       });
-      if (res.ok) {
-        setStatus("success");
-        form.reset();
-      } else {
-        setStatus("error");
-      }
+      if (res.ok) { setStatus("success"); form.reset(); }
+      else setStatus("error");
     } catch {
       setStatus("error");
     }
@@ -61,26 +43,24 @@ export default function Contact() {
     <section id="contact" className="py-24 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-14 scroll-animate">
-          <span className="text-violet-400 font-mono text-sm">{"// contact"}</span>
-          <h2 className="text-4xl font-bold text-white mt-2 mb-3">
-            Travaillons Ensemble
-          </h2>
-          <p className="text-slate-400 text-lg max-w-xl mx-auto">
-            Disponible pour des projets freelance, des collaborations ou des opportunités
-            full-time en Fintech, IA ou développement logiciel.
-          </p>
+          <span className="text-violet-400 font-mono text-sm">{c.label}</span>
+          <h2 className="text-4xl font-bold text-[var(--t1)] mt-2 mb-3">{c.title}</h2>
+          <p className="text-[var(--t2)] text-lg max-w-xl mx-auto">{c.description}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {/* Left: info + social */}
+          {/* Info + social */}
           <div className="scroll-animate scroll-animate-delay-1 space-y-6">
             {/* Contact info */}
-            <div className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60">
-              <h3 className="text-slate-300 font-semibold mb-4">Coordonnées</h3>
+            <div
+              className="p-6 rounded-2xl border"
+              style={{ backgroundColor: "var(--card)", borderColor: "var(--brdr)" }}
+            >
+              <h3 className="text-[var(--t4)] font-semibold mb-4">{c.coordsTitle}</h3>
               <div className="space-y-3">
                 <a
                   href="mailto:alantchapda@gmail.com"
-                  className="flex items-center gap-3 text-slate-400 hover:text-violet-400 transition-colors group"
+                  className="flex items-center gap-3 text-[var(--t2)] hover:text-violet-400 transition-colors group"
                 >
                   <span className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 group-hover:bg-violet-500/20 transition-colors">
                     ✉
@@ -89,109 +69,108 @@ export default function Contact() {
                 </a>
                 <a
                   href="tel:+237672171934"
-                  className="flex items-center gap-3 text-slate-400 hover:text-cyan-400 transition-colors group"
+                  className="flex items-center gap-3 text-[var(--t2)] hover:text-cyan-400 transition-colors group"
                 >
                   <span className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500/20 transition-colors">
                     📞
                   </span>
                   <span className="text-sm">+237 672 171 934</span>
                 </a>
-                <div className="flex items-center gap-3 text-slate-500">
-                  <span className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center">📍</span>
-                  <span className="text-sm">Yaoundé, Cameroun — Mobilité & Remote</span>
+                <div className="flex items-center gap-3 text-[var(--t3)]">
+                  <span className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "var(--surf)" }}>📍</span>
+                  <span className="text-sm">{c.location}</span>
                 </div>
               </div>
             </div>
 
-            {/* Social links */}
+            {/* Social */}
             <div className="flex gap-3">
-              {socialLinks.map((link) => (
+              {[
+                { label: "GitHub",   value: "GAUSS-TPAC",    href: "https://github.com/GAUSS-TPAC",                icon: <GithubIcon /> },
+                { label: "LinkedIn", value: "alan-tchapda",   href: "https://linkedin.com/in/alan-tchapda-267981350", icon: <LinkedinIcon /> },
+              ].map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center gap-3 p-4 rounded-xl bg-slate-900/50 border border-slate-800/60 hover:border-violet-500/40 hover:-translate-y-0.5 transition-all duration-300 text-slate-400 hover:text-white"
+                  className="flex-1 flex items-center gap-3 p-4 rounded-xl border hover:border-violet-500/40 hover:-translate-y-0.5 transition-all duration-300 text-[var(--t2)] hover:text-[var(--t1)]"
+                  style={{ backgroundColor: "var(--card)", borderColor: "var(--brdr)" }}
                 >
                   <div className="text-violet-400">{link.icon}</div>
                   <div>
-                    <div className="text-white text-sm font-medium">{link.label}</div>
-                    <div className="text-slate-500 text-xs">{link.value}</div>
+                    <div className="text-[var(--t1)] text-sm font-medium">{link.label}</div>
+                    <div className="text-[var(--t3)] text-xs">{link.value}</div>
                   </div>
                 </a>
               ))}
             </div>
 
-            {/* Availability badge */}
+            {/* Availability */}
             <div className="flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/20">
               <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse shrink-0" />
-              <p className="text-green-400 text-sm font-medium">
-                Disponible pour de nouveaux projets dès maintenant
-              </p>
+              <p className="text-green-400 text-sm font-medium">{c.availableBadge}</p>
             </div>
           </div>
 
-          {/* Right: contact form */}
+          {/* Form */}
           <div className="scroll-animate scroll-animate-delay-2">
             <form
               onSubmit={handleSubmit}
-              className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800/60 space-y-4"
+              className="p-6 rounded-2xl border space-y-4"
+              style={{ backgroundColor: "var(--card)", borderColor: "var(--brdr)" }}
             >
-              <h3 className="text-slate-300 font-semibold mb-2">Envoyer un message</h3>
+              <h3 className="text-[var(--t4)] font-semibold mb-2">{c.formTitle}</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs text-slate-500 mb-1.5 font-mono">Nom</label>
+                  <label className="block text-xs text-[var(--t3)] mb-1.5 font-mono">{c.name}</label>
                   <input
-                    name="name"
-                    type="text"
-                    required
-                    placeholder="Votre nom"
-                    className="w-full px-3 py-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-200 placeholder-slate-600 text-sm focus:outline-none focus:border-violet-500/60 transition-colors"
+                    name="name" type="text" required
+                    placeholder={c.namePlaceholder}
+                    className="w-full px-3 py-2.5 rounded-lg text-[var(--t4)] text-sm focus:outline-none focus:border-violet-500/60 transition-colors"
+                    style={{ backgroundColor: "var(--surf)", border: "1px solid var(--brdr2)" }}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-slate-500 mb-1.5 font-mono">Email</label>
+                  <label className="block text-xs text-[var(--t3)] mb-1.5 font-mono">{c.email}</label>
                   <input
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="votre@email.com"
-                    className="w-full px-3 py-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-200 placeholder-slate-600 text-sm focus:outline-none focus:border-violet-500/60 transition-colors"
+                    name="email" type="email" required
+                    placeholder={c.emailPlaceholder}
+                    className="w-full px-3 py-2.5 rounded-lg text-[var(--t4)] text-sm focus:outline-none focus:border-violet-500/60 transition-colors"
+                    style={{ backgroundColor: "var(--surf)", border: "1px solid var(--brdr2)" }}
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs text-slate-500 mb-1.5 font-mono">Sujet</label>
+                <label className="block text-xs text-[var(--t3)] mb-1.5 font-mono">{c.subject}</label>
                 <input
-                  name="subject"
-                  type="text"
-                  placeholder="Projet freelance, collaboration..."
-                  className="w-full px-3 py-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-200 placeholder-slate-600 text-sm focus:outline-none focus:border-violet-500/60 transition-colors"
+                  name="subject" type="text"
+                  placeholder={c.subjectPlaceholder}
+                  className="w-full px-3 py-2.5 rounded-lg text-[var(--t4)] text-sm focus:outline-none focus:border-violet-500/60 transition-colors"
+                  style={{ backgroundColor: "var(--surf)", border: "1px solid var(--brdr2)" }}
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-slate-500 mb-1.5 font-mono">Message</label>
+                <label className="block text-xs text-[var(--t3)] mb-1.5 font-mono">{c.message}</label>
                 <textarea
-                  name="message"
-                  required
-                  rows={4}
-                  placeholder="Décrivez votre projet ou votre opportunité..."
-                  className="w-full px-3 py-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50 text-slate-200 placeholder-slate-600 text-sm focus:outline-none focus:border-violet-500/60 transition-colors resize-none"
+                  name="message" required rows={4}
+                  placeholder={c.messagePlaceholder}
+                  className="w-full px-3 py-2.5 rounded-lg text-[var(--t4)] text-sm focus:outline-none focus:border-violet-500/60 transition-colors resize-none"
+                  style={{ backgroundColor: "var(--surf)", border: "1px solid var(--brdr2)" }}
                 />
               </div>
 
               {status === "success" && (
                 <div className="flex items-center gap-2 p-3 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-sm">
-                  ✓ Message envoyé ! Je vous répondrai très rapidement.
+                  ✓ {c.successMsg}
                 </div>
               )}
-
               {status === "error" && (
                 <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
-                  ✗ Une erreur s&apos;est produite. Écrivez-moi directement à alantchapda@gmail.com
+                  ✗ {c.errorMsg}
                 </div>
               )}
 
@@ -199,11 +178,9 @@ export default function Contact() {
                 type="submit"
                 disabled={status === "loading" || status === "success"}
                 className="w-full py-3 rounded-full text-white font-semibold text-sm transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/30 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
-                style={{
-                  background: "linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)",
-                }}
+                style={{ background: "linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)" }}
               >
-                {status === "loading" ? "Envoi en cours..." : status === "success" ? "Envoyé ✓" : "Envoyer le message →"}
+                {status === "loading" ? c.sending : status === "success" ? c.sent : c.send}
               </button>
             </form>
           </div>

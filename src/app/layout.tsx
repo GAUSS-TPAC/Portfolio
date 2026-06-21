@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ScrollAnimations from "@/components/ScrollAnimations";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Alan Chanel Tchapda | Ingénieur Fintech · Fullstack · Data",
@@ -34,10 +35,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr">
-      <body className="bg-[#0a0a0f] text-slate-100 antialiased">
-        <ScrollAnimations />
-        {children}
+    <html lang="fr" data-theme="dark">
+      <body className="antialiased">
+        <Providers>
+          <ScrollAnimations />
+          {children}
+        </Providers>
       </body>
     </html>
   );

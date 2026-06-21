@@ -5,59 +5,76 @@
   --font-mono: ui-monospace, "Cascadia Code", "Fira Code", Consolas, monospace;
 }
 
-html {
-  scroll-behavior: smooth;
+/* ── Theme tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --bg:    #0a0a0f;
+  --nav:   rgba(10, 10, 15, 0.92);
+  --card:  rgba(15, 23, 42, 0.5);
+  --sect:  rgba(2, 6, 23, 0.5);
+  --surf:  rgba(30, 41, 59, 0.65);
+  --t1:    #f1f5f9;
+  --t2:    #94a3b8;
+  --t3:    #64748b;
+  --t4:    #cbd5e1;
+  --brdr:  rgba(30, 41, 59, 0.6);
+  --brdr2: rgba(51, 65, 85, 0.5);
 }
 
+[data-theme="light"] {
+  --bg:    #f1f5f9;
+  --nav:   rgba(248, 250, 252, 0.94);
+  --card:  rgba(255, 255, 255, 0.92);
+  --sect:  rgba(226, 232, 240, 0.5);
+  --surf:  rgba(226, 232, 240, 0.85);
+  --t1:    #0f172a;
+  --t2:    #475569;
+  --t3:    #94a3b8;
+  --t4:    #334155;
+  --brdr:  rgba(203, 213, 225, 0.7);
+  --brdr2: rgba(148, 163, 184, 0.5);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
 body {
-  background-color: #0a0a0f;
-  color: #f1f5f9;
+  background-color: var(--bg);
+  color: var(--t1);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 2px; }
 
+/* ── Keyframes ────────────────────────────────────────────────────────────── */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
+  50%       { transform: translateY(-15px); }
 }
 
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
+.animate-float    { animation: float 6s ease-in-out infinite; }
+.animate-fade-up  { animation: fade-up 0.7s ease-out both; }
 
-.animate-fade-up {
-  animation: fade-up 0.7s ease-out both;
-}
-
-/* Scroll-triggered animations via IntersectionObserver */
+/* ── Scroll animations ────────────────────────────────────────────────────── */
 .scroll-animate {
   opacity: 0;
   transform: translateY(32px);
   transition: opacity 0.65s ease, transform 0.65s ease;
 }
-
-.scroll-animate.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
+.scroll-animate.in-view { opacity: 1; transform: translateY(0); }
 
 .scroll-animate-left {
   opacity: 0;
   transform: translateX(-32px);
   transition: opacity 0.65s ease, transform 0.65s ease;
 }
-
-.scroll-animate-left.in-view {
-  opacity: 1;
-  transform: translateX(0);
-}
+.scroll-animate-left.in-view { opacity: 1; transform: translateX(0); }
 
 .scroll-animate-delay-1 { transition-delay: 100ms; }
 .scroll-animate-delay-2 { transition-delay: 200ms; }
