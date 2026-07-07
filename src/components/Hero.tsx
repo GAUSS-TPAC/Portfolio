@@ -87,7 +87,7 @@ export default function Hero() {
             <span className="ml-2 inline-block group-hover:translate-x-1 transition-transform">→</span>
           </a>
           <a
-            href="/Alan_Tchapda_Fintech_Authentic_FR.docx.pdf"
+            href="/alan-tchapda-cv-fintech-fr.pdf"
             download
             className="flex items-center gap-2 px-8 py-3 border border-violet-500/50 hover:border-violet-400 text-violet-400 hover:text-white font-semibold rounded-full transition-all duration-300 hover:bg-violet-500/10"
           >
@@ -95,7 +95,7 @@ export default function Hero() {
             {h.cvFintech}
           </a>
           <a
-            href="/Fullstack_Developer_Alan_Chanel_Tchapda_Pieme_CV(en).docx.pdf"
+            href="/alan-tchapda-cv-fullstack-en.pdf"
             download
             className="flex items-center gap-2 px-6 py-3 border border-[var(--brdr2)] hover:border-cyan-500/50 text-[var(--t2)] hover:text-cyan-400 font-medium rounded-full transition-all duration-300 hover:bg-cyan-500/5 text-sm"
           >

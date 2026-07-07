@@ -15,6 +15,7 @@ export const translations = {
       skills: "Compétences",
       projects: "Projets",
       experience: "Expérience",
+      about: "Formation",
       contact: "Contact",
       hireMe: "Hire me",
     },
@@ -170,7 +171,7 @@ export const translations = {
   en: {
     nav: {
       home: "Home", skills: "Skills", projects: "Projects",
-      experience: "Experience", contact: "Contact", hireMe: "Hire me",
+      experience: "Experience", about: "About", contact: "Contact", hireMe: "Hire me",
     },
     hero: {
       available: "Available for projects & opportunities",
@@ -311,7 +312,7 @@ export const translations = {
   zh: {
     nav: {
       home: "首页", skills: "技能", projects: "项目",
-      experience: "经验", contact: "联系", hireMe: "雇用我",
+      experience: "经验", about: "学历", contact: "联系", hireMe: "雇用我",
     },
     hero: {
       available: "开放项目合作与就业机会",
@@ -452,7 +453,7 @@ export const translations = {
   es: {
     nav: {
       home: "Inicio", skills: "Habilidades", projects: "Proyectos",
-      experience: "Experiencia", contact: "Contacto", hireMe: "Contrátame",
+      experience: "Experiencia", about: "Formación", contact: "Contacto", hireMe: "Contrátame",
     },
     hero: {
       available: "Disponible para proyectos y oportunidades",
@@ -593,7 +594,7 @@ export const translations = {
   de: {
     nav: {
       home: "Startseite", skills: "Fähigkeiten", projects: "Projekte",
-      experience: "Erfahrung", contact: "Kontakt", hireMe: "Einstellen",
+      experience: "Erfahrung", about: "Ausbildung", contact: "Kontakt", hireMe: "Einstellen",
     },
     hero: {
       available: "Verfügbar für Projekte & Möglichkeiten",
