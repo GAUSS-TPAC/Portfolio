@@ -729,6 +729,6 @@ export const translations = {
     },
     footer: { builtWith: "Erstellt mit" },
   },
-} as const;
+};
 
 export type Translation = typeof translations.fr;
