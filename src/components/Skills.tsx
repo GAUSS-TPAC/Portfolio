@@ -52,6 +52,32 @@ const SKILL_ICONS: Record<string, JSX.Element> = {
   devops: <ShieldIcon />,
 };
 
+const TECH_ICON_SLUGS: Record<string, string> = {
+  "Java":                    "java",
+  "Python":                  "python",
+  "JavaScript":              "javascript",
+  "TypeScript":              "typescript",
+  "Dart":                    "dart",
+  "React.js":                "react",
+  "Next.js":                 "nextdotjs",
+  "Flutter":                 "flutter",
+  "Redux":                   "redux",
+  "Tailwind CSS":            "tailwindcss",
+  "HTML5":                   "html5",
+  "CSS3":                    "css3",
+  "Spring Boot":             "springboot",
+  "Django REST Framework":   "django",
+  "Node.js":                 "nodedotjs",
+  "GraphQL":                 "graphql",
+  "PostgreSQL":              "postgresql",
+  "MySQL":                   "mysql",
+  "MongoDB":                 "mongodb",
+  "Docker":                  "docker",
+  "GitHub Actions":          "githubactions",
+  "Linux":                   "linux",
+  "Git":                     "git",
+};
+
 export default function Skills() {
   const { t } = useLanguage();
   const s = t.skills;
@@ -84,15 +110,27 @@ export default function Skills() {
                 </h3>
               </div>
               <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-2.5 py-1 text-xs font-mono rounded-md text-[var(--t4)] hover:border-violet-500/50 transition-colors"
-                    style={{ backgroundColor: "var(--surf)", border: "1px solid var(--brdr2)" }}
-                  >
-                    {skill}
-                  </span>
-                ))}
+                {cat.skills.map((skill) => {
+                  const slug = TECH_ICON_SLUGS[skill];
+                  return (
+                    <span
+                      key={skill}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded-md text-[var(--t4)] hover:border-violet-500/50 transition-colors"
+                      style={{ backgroundColor: "var(--surf)", border: "1px solid var(--brdr2)" }}
+                    >
+                      {slug && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={`https://cdn.simpleicons.org/${slug}`}
+                          alt=""
+                          aria-hidden="true"
+                          className="w-3 h-3 tech-icon"
+                        />
+                      )}
+                      {skill}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           ))}
