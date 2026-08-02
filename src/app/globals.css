@@ -18,6 +18,22 @@
   --t4:    #cbd5e1;
   --brdr:  rgba(30, 41, 59, 0.6);
   --brdr2: rgba(51, 65, 85, 0.5);
+
+  /* État de survol des cartes. Neutre, et non violet : quand six cartes
+     s'allument en violet au passage de la souris, l'accent ne signale plus rien. */
+  --brdr-hov: rgba(100, 116, 139, 0.55);
+  --card-hov: rgba(30, 41, 59, 0.55);
+
+  /* Accent : une seule source de vérité, pour pouvoir le doser au lieu de
+     répéter `violet-500` à quinze endroits. */
+  --accent:      #8b5cf6;
+  --accent-hi:   #a78bfa;
+  --accent-soft: rgba(139, 92, 246, 0.12);
+  --accent-brdr: rgba(139, 92, 246, 0.30);
+  --halo:        rgba(139, 92, 246, 0.16);
+  --grid-line:   rgba(148, 163, 184, 0.08);
+  --accent-btn:  #7c3aed;
+  --accent-btn-h: #8b5cf6;
 }
 
 [data-theme="light"] {
@@ -32,10 +48,28 @@
   --t4:    #334155;
   --brdr:  rgba(203, 213, 225, 0.7);
   --brdr2: rgba(148, 163, 184, 0.5);
+
+  --brdr-hov: rgba(100, 116, 139, 0.55);
+  --card-hov: rgba(255, 255, 255, 1);
+
+  /* Violet assombri : sur fond clair, le #8b5cf6 tombe sous 4.5:1 en texte. */
+  --accent:      #6d28d9;
+  --accent-hi:   #5b21b6;
+  --accent-soft: rgba(109, 40, 217, 0.08);
+  --accent-brdr: rgba(109, 40, 217, 0.22);
+  --halo:        rgba(109, 40, 217, 0.10);
+  --grid-line:   rgba(15, 23, 42, 0.05);
+  --accent-btn:  #6d28d9;
+  --accent-btn-h: #5b21b6;
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────────── */
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* La navbar est fixe : sans cette marge, une ancre place le titre de section
+     derrière la barre. */
+  scroll-padding-top: 5rem;
+}
 
 body {
   background-color: var(--bg);
@@ -45,7 +79,15 @@ body {
 
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* Anneau de focus visible : tous les boutons sont atteignables au clavier, et le
+   contour par défaut disparaît sur fond sombre. */
+:focus-visible {
+  outline: 2px solid var(--accent-hi);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
 
 /* ── Keyframes ────────────────────────────────────────────────────────────── */
 @keyframes float {
@@ -62,26 +104,258 @@ body {
 .animate-fade-up  { animation: fade-up 0.7s ease-out both; }
 
 /* ── Scroll animations ────────────────────────────────────────────────────── */
-.scroll-animate {
+/* Tout est conditionné à `.js-reveal`, posée par le script d'amorçage du layout.
+   Le contenu n'est donc masqué que là où le JavaScript répond effectivement :
+   par défaut, le portfolio s'affiche en entier. Le décalage est aussi plus court
+   qu'avant (32px → 18px) — au-delà, l'entrée se voit davantage que le contenu
+   qu'elle amène. */
+.js-reveal .scroll-animate {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
 }
-.scroll-animate.in-view { opacity: 1; transform: translateY(0); }
+.js-reveal .scroll-animate.in-view { opacity: 1; transform: translateY(0); }
 
-.scroll-animate-left {
-  opacity: 0;
-  transform: translateX(-32px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
+/* Respect de prefers-reduced-motion : sans cette règle, les éléments
+   `.scroll-animate` restent à opacity:0 pour qui désactive les animations —
+   la page apparaît vide plutôt que simplement statique. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .animate-float,
+  .animate-fade-up,
+  .animate-pulse,
+  .animate-bounce { animation: none !important; }
+
+  .js-reveal .scroll-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
-.scroll-animate-left.in-view { opacity: 1; transform: translateX(0); }
 
-.scroll-animate-delay-1 { transition-delay: 100ms; }
-.scroll-animate-delay-2 { transition-delay: 200ms; }
-.scroll-animate-delay-3 { transition-delay: 300ms; }
-.scroll-animate-delay-4 { transition-delay: 400ms; }
+/* ── Primitives partagées ─────────────────────────────────────────────────── */
+/* Ces classes remplacent les `style={{ backgroundColor: "var(--card)", ... }}`
+   qui étaient recopiés dans chaque composant. Un réglage se fait désormais ici
+   une fois, au lieu de six fois à des valeurs légèrement différentes. */
+
+/* Gouttière commune à la navbar, au hero et à toutes les sections : le bord
+   gauche du contenu ne bouge plus d'une section à l'autre. */
+.shell {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) {
+  .shell { padding-inline: 1.5rem; }
+}
+
+.card {
+  background-color: var(--card);
+  border: 1px solid var(--brdr);
+  border-radius: 0.75rem;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+.card-hover:hover {
+  border-color: var(--brdr-hov);
+  background-color: var(--card-hov);
+}
+
+/* Pastille de technologie (Skills, Projects, Experience) */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.1875rem 0.5rem;
+  border: 1px solid var(--brdr2);
+  border-radius: 0.375rem;
+  background-color: var(--surf);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--t2);
+  white-space: nowrap;
+}
+
+/* Étiquette de catégorie (type de projet, statut de diplôme) */
+.pill {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--brdr2);
+  border-radius: 999px;
+  background-color: var(--surf);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  color: var(--t4);
+  white-space: nowrap;
+}
+
+.btn-accent {
+  background-color: var(--accent-btn);
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+.btn-accent:hover { background-color: var(--accent-btn-h); }
+.btn-accent:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Bouton secondaire, contour uniquement */
+.btn-ghost {
+  background-color: var(--surf);
+  border: 1px solid var(--brdr2);
+  color: var(--t4);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.btn-ghost:hover { color: var(--t1); border-color: var(--brdr-hov); }
+
+/* Champ de formulaire : l'anneau de focus utilise l'accent, comme partout
+   ailleurs, au lieu d'une simple bordure violette à peine perceptible. */
+.field {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--brdr2);
+  border-radius: 0.5rem;
+  background-color: var(--surf);
+  color: var(--t1);
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.field::placeholder { color: var(--t3); }
+.field:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Lien de navigation. Le survol va vers --t1 : réserver la couleur d'accent à
+   l'élément actif rend l'indicateur de section réellement lisible. */
+.nav-link {
+  position: relative;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--t2);
+  transition: color 0.2s ease;
+}
+.nav-link:hover { color: var(--t1); }
+.nav-link[aria-current="true"] { color: var(--accent-hi); }
+.nav-link[aria-current="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.4rem;
+  height: 1.5px;
+  border-radius: 2px;
+  background-color: var(--accent);
+}
 
 /* ── Tech / Simple Icons ──────────────────────────────────────────────────── */
 .tech-icon {
   opacity: 0.9;
+}
+
+/* ── Échelle typographique ────────────────────────────────────────────────── */
+/* Une seule définition par rôle de texte : les six variantes de titres qui
+   coexistaient dans les composants sont ramenées à quatre niveaux cohérents.
+   Le tracking négatif sur les grands corps et l'interligne plus généreux sur le
+   texte courant sont les deux réglages qui font le plus pour la lisibilité. */
+
+.section-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-hi);
+}
+
+/* Titre de couverture : un cran au-dessus de .section-title. Le poids reste à
+   600 — au-delà de 48px, un 700 se lit comme de la publicité, pas comme un
+   portfolio d'ingénieur. Le tracking très négatif compense l'échelle. */
+.display-title {
+  font-size: clamp(2.625rem, 1.5rem + 4.6vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.03;
+  color: var(--t1);
+  text-wrap: balance;
+}
+
+/* Ligne de chiffres sous le pli : la seule chose qu'un recruteur scanne. */
+.stat-value {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 1.875rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--t1);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  margin-top: 0.375rem;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--t3);
+}
+
+.section-title {
+  /* 30px → 40px, fluide, sans palier brutal au breakpoint */
+  font-size: clamp(1.875rem, 1.45rem + 1.5vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.14;
+  color: var(--t1);
+  margin-top: 0.875rem;
+  text-wrap: balance;
+}
+
+/* Plus de `margin-inline: auto` : les en-têtes sont alignés à gauche comme le
+   hero, un chapeau centré au-dessus d'un titre à gauche se voit immédiatement. */
+.section-lead {
+  margin-top: 1rem;
+  max-width: 58ch;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--t2);
+  text-wrap: pretty;
+}
+
+/* Titre de carte : le niveau juste sous .section-title */
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.011em;
+  color: var(--t1);
+}
+
+/* Intertitre de colonne (« Formation », « Certifications »…) */
+.group-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--t3);
+}
+
+/* Texte courant des cartes : interligne 1.65 plutôt que le 1.5 par défaut */
+.body-sm {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--t2);
+}
+
+/* Chiffres et dates alignés sur une même chasse */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--t3);
+  font-variant-numeric: tabular-nums;
 }

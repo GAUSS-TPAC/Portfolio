@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Les CV contiennent des données personnelles (état civil, coordonnées).
+# On les laisse téléchargeables depuis le site, mais pas indexables.
+Disallow: /*.pdf$
+
+# Aspirateurs d'adresses e-mail et robots de collecte de contacts.
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

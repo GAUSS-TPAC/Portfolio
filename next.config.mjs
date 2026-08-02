@@ -4,13 +4,20 @@
 // 'unsafe-inline' reste nécessaire pour les scripts d'hydratation de Next.js et
 // les styles inline de Tailwind : une CSP à nonce imposerait un middleware et
 // rendrait toutes les pages dynamiques, ce qui n'a pas de sens pour un site statique.
+// En développement, webpack exécute chaque module via eval() et ouvre un
+// WebSocket pour le rechargement à chaud. Sans ces deux autorisations, la CSP
+// faisait échouer l'hydratation de React : la page restait au HTML servi, donc
+// tout ce qui est révélé au défilement demeurait invisible. Les deux sont
+// strictement réservées au dev — le build de production n'en a pas besoin.
+const isDev = process.env.NODE_ENV === "development";
+
 const csp = [
   "default-src 'self'",
   "img-src 'self' data: https://cdn.simpleicons.org",
   "style-src 'self' 'unsafe-inline'",
-  "script-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
   "font-src 'self' data:",
-  "connect-src 'self' https://formspree.io",
+  `connect-src 'self' https://formspree.io${isDev ? " ws: wss:" : ""}`,
   "form-action 'self' https://formspree.io",
   "frame-ancestors 'none'",
   "base-uri 'self'",

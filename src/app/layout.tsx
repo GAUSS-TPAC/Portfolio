@@ -36,6 +36,21 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr" data-theme="dark">
+      <head>
+        {/* Le masquage avant révélation est désormais conditionné à cette classe,
+            posée avant le premier rendu pour éviter tout clignotement.
+            Auparavant `.scroll-animate` masquait le contenu sans condition : si
+            React n'arrivait jamais à s'hydrater, le portfolio se réduisait à son
+            hero, sans le moindre indice de ce qui n'allait pas. Le garde-fou à
+            trois secondes réaffiche tout si React n'a pas donné signe de vie. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){var d=document.documentElement;d.classList.add('js-reveal');" +
+              "setTimeout(function(){if(!window.__revealReady)d.classList.remove('js-reveal');},3000);})();",
+          }}
+        />
+      </head>
       <body className="antialiased">
         <Providers>
           <ScrollAnimations />
