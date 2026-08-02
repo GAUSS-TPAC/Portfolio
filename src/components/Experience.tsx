@@ -13,11 +13,16 @@ const TECH_ICONS: Record<string, string> = {
   "Jest":          "jest",
   "CI/CD":         "githubactions",
   "Git":           "git",
+  "Python":        "python",
+  "Pandas":        "pandas",
+  "scikit-learn":  "scikitlearn",
+  "Power BI":      "powerbi",
 };
 
 const COMPANY_LOGOS: Record<string, string> = {
-  Gohze:   "/gohze logo.jpeg",
-  Yowyob:  "/yowyob-logo.jpeg",
+  "Gohze":                "/gohze logo.jpeg",
+  "Yowyob":               "/yowyob-logo.jpeg",
+  "Afriland First Bank":  "/Afriland-First-Bank-logo.jpg",
 };
 
 function CompanyLogo({ name, color }: { name: string; color: string }) {

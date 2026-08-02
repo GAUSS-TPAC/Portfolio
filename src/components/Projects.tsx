@@ -7,6 +7,25 @@ const GithubIcon = () => (
   </svg>
 );
 
+const TECH_ICON_SLUGS: Record<string, string> = {
+  "Flutter":       "flutter",
+  "Django REST":   "django",
+  "PostgreSQL":    "postgresql",
+  "WebSocket":     "socketdotio",
+  "Docker":        "docker",
+  "React":         "react",
+  "Next.js":       "nextdotjs",
+  "Spring Boot":   "springboot",
+  "Redux":         "redux",
+  "CI/CD":         "githubactions",
+  "JWT":           "jsonwebtokens",
+  "TypeScript":    "typescript",
+  "Python":        "python",
+  "GraphQL":       "graphql",
+  "MongoDB":       "mongodb",
+  "MySQL":         "mysql",
+};
+
 export default function Projects() {
   const { t } = useLanguage();
   const p = t.projects;
@@ -61,16 +80,28 @@ export default function Projects() {
                 {project.description}
               </p>
 
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs font-mono rounded text-[var(--t2)]"
-                    style={{ backgroundColor: "var(--surf)", border: "1px solid var(--brdr2)" }}
-                  >
-                    {tag}
-                  </span>
-                ))}
+              <div className="flex flex-wrap gap-1.5">
+                {project.tags.map((tag) => {
+                  const slug = TECH_ICON_SLUGS[tag];
+                  return (
+                    <span
+                      key={tag}
+                      className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-mono rounded text-[var(--t2)]"
+                      style={{ backgroundColor: "var(--surf)", border: "1px solid var(--brdr2)" }}
+                    >
+                      {slug && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={`https://cdn.simpleicons.org/${slug}`}
+                          alt=""
+                          aria-hidden="true"
+                          className="w-3 h-3 tech-icon"
+                        />
+                      )}
+                      {tag}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           ))}

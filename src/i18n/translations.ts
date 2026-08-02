@@ -84,6 +84,19 @@ export const translations = {
       title: "Parcours Professionnel",
       data: [
         {
+          role: "Data Analyst / Data Engineer",
+          company: "Afriland First Bank",
+          period: "2026 – Présent",
+          location: "Yaoundé, Cameroun",
+          accentColor: "#06b6d4",
+          bullets: [
+            "Analyse des données d'utilisation des cartes prépayées — segmentation des porteurs, détection des schémas de transaction et suivi des indicateurs d'activation et de rétention.",
+            "Text mining et analyse de sentiment sur les verbatims clients — pipeline NLP de nettoyage, vectorisation et classification des retours.",
+            "Analyse des réclamations clients — typologie des motifs, identification des irritants récurrents et restitution des résultats aux équipes métier.",
+          ],
+          tags: ["Python", "Pandas", "PostgreSQL", "scikit-learn", "NLP", "Power BI"],
+        },
+        {
           role: "Développeur Fullstack Junior",
           company: "Gohze",
           period: "Juin 2025 – Présent",
@@ -232,6 +245,17 @@ export const translations = {
       title: "Professional Journey",
       data: [
         {
+          role: "Data Analyst / Data Engineer",
+          company: "Afriland First Bank", period: "2026 – Present", location: "Yaoundé, Cameroon",
+          accentColor: "#06b6d4",
+          bullets: [
+            "Prepaid card usage analytics — cardholder segmentation, transaction pattern detection, and tracking of activation and retention metrics.",
+            "Text mining and sentiment analysis on customer verbatims — NLP pipeline for cleaning, vectorization, and feedback classification.",
+            "Customer complaint analysis — categorization of complaint drivers, identification of recurring pain points, and reporting of findings to business teams.",
+          ],
+          tags: ["Python", "Pandas", "PostgreSQL", "scikit-learn", "NLP", "Power BI"],
+        },
+        {
           role: "Junior Fullstack Developer",
           company: "Gohze", period: "June 2025 – Present", location: "Yaoundé, Cameroon",
           accentColor: "#8b5cf6",
@@ -372,6 +396,17 @@ export const translations = {
       label: "// 工作经验",
       title: "职业经历",
       data: [
+        {
+          role: "数据分析师 / 数据工程师",
+          company: "Afriland First Bank", period: "2026 – 至今", location: "喀麦隆雅温得",
+          accentColor: "#06b6d4",
+          bullets: [
+            "预付卡使用数据分析——持卡人分群、交易模式识别，以及激活率与留存率指标跟踪。",
+            "客户反馈文本挖掘与情感分析——构建NLP流水线完成数据清洗、向量化与反馈分类。",
+            "客户投诉分析——投诉原因归类、识别高频痛点，并向业务团队汇报分析结果。",
+          ],
+          tags: ["Python", "Pandas", "PostgreSQL", "scikit-learn", "NLP", "Power BI"],
+        },
         {
           role: "初级全栈开发工程师",
           company: "Gohze", period: "2025年6月 – 至今", location: "喀麦隆雅温得",
@@ -514,6 +549,17 @@ export const translations = {
       title: "Trayectoria Profesional",
       data: [
         {
+          role: "Data Analyst / Data Engineer",
+          company: "Afriland First Bank", period: "2026 – Presente", location: "Yaundé, Camerún",
+          accentColor: "#06b6d4",
+          bullets: [
+            "Análisis de datos de uso de tarjetas prepago — segmentación de titulares, detección de patrones de transacción y seguimiento de indicadores de activación y retención.",
+            "Text mining y análisis de sentimiento sobre comentarios de clientes — pipeline NLP de limpieza, vectorización y clasificación de opiniones.",
+            "Análisis de reclamaciones de clientes — tipología de motivos, identificación de puntos de fricción recurrentes y presentación de resultados a los equipos de negocio.",
+          ],
+          tags: ["Python", "Pandas", "PostgreSQL", "scikit-learn", "NLP", "Power BI"],
+        },
+        {
           role: "Desarrollador Fullstack Junior",
           company: "Gohze", period: "Jun. 2025 – Presente", location: "Yaundé, Camerún",
           accentColor: "#8b5cf6",
@@ -654,6 +700,17 @@ export const translations = {
       label: "// erfahrung",
       title: "Beruflicher Werdegang",
       data: [
+        {
+          role: "Data Analyst / Data Engineer",
+          company: "Afriland First Bank", period: "2026 – Heute", location: "Yaoundé, Kamerun",
+          accentColor: "#06b6d4",
+          bullets: [
+            "Analyse der Nutzungsdaten von Prepaid-Karten — Segmentierung der Karteninhaber, Erkennung von Transaktionsmustern sowie Tracking von Aktivierungs- und Retentionskennzahlen.",
+            "Text Mining und Sentiment-Analyse von Kundenfeedback — NLP-Pipeline zur Bereinigung, Vektorisierung und Klassifizierung von Rückmeldungen.",
+            "Analyse von Kundenreklamationen — Typologisierung der Beschwerdegründe, Identifikation wiederkehrender Schwachstellen und Ergebnispräsentation für die Fachbereiche.",
+          ],
+          tags: ["Python", "Pandas", "PostgreSQL", "scikit-learn", "NLP", "Power BI"],
+        },
         {
           role: "Junior Fullstack-Entwickler",
           company: "Gohze", period: "Jun. 2025 – Heute", location: "Yaoundé, Kamerun",
