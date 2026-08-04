@@ -2,32 +2,54 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ScrollAnimations from "@/components/ScrollAnimations";
 import { Providers } from "./providers";
+import { SITE_URL } from "@/lib/site";
+
+const TITLE = "Alan Chanel Tchapda | ML & Data Engineer";
+const DESCRIPTION =
+  "Je construis les chaînes qui amènent la donnée jusqu'au modèle : ingestion, transformation, mise en production. Élève ingénieur à l'ENSP, deux ans de livraison en production sur des API et des plateformes de données.";
 
 export const metadata: Metadata = {
-  title: "Alan Chanel Tchapda | Ingénieur Fintech · Fullstack · Data",
-  description:
-    "Portfolio d'Alan Chanel Tchapda Pieme — Ingénieur Fintech, Développeur Fullstack (React, Next.js, Spring Boot, Flutter), Data Scientist & ML Engineer basé à Yaoundé, Cameroun.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
   keywords: [
     "Alan Tchapda",
-    "Ingénieur Fintech",
-    "Développeur Fullstack",
-    "Data Scientist",
     "ML Engineer",
+    "Data Engineer",
+    "Data Scientist",
+    "pipeline de données",
+    "machine learning",
+    "Python",
     "Spring Boot",
     "Next.js",
-    "Flutter",
-    "Django",
     "portfolio",
     "Yaoundé",
     "Cameroun",
   ],
   authors: [{ name: "Alan Chanel Tchapda Pieme" }],
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Alan Chanel Tchapda | Ingénieur Fintech · Fullstack · Data",
-    description:
-      "Ingénieur logiciel +2 ans d'expérience — APIs sécurisées, pipelines temps réel, applications mobiles & web.",
-    type: "website",
+    title: TITLE,
+    description: DESCRIPTION,
+    type: "profile",
+    locale: "fr_FR",
+    url: "/",
+    siteName: "Alan Chanel Tchapda",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Alan Chanel Tchapda Pieme — ML & Data Engineer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/og.png"],
   },
 };
 

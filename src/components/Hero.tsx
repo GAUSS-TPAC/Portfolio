@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 const DownloadIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -15,36 +14,17 @@ const PinIcon = () => (
   </svg>
 );
 
-const CV_FILES = {
-  fintech:   "/alan-tchapda-cv-fintech-fr.pdf",
-  fullstack: "/alan-tchapda-cv-fullstack-en.pdf",
+/* Un seul CV proposé, choisi par la langue affichée. Deux boutons de
+   téléchargement côte à côte demandaient au visiteur d'arbitrer entre deux
+   versions de la même personne — un arbitrage qui n'est pas le sien. */
+const CV_BY_LANG = {
+  fr: "/alan-tchapda-cv-fintech-fr.pdf",
+  en: "/alan-tchapda-cv-fullstack-en.pdf",
 } as const;
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const h = t.hero;
-
-  /* Les deux CV tenaient dans deux boutons de plus, ce qui donnait trois appels
-     à l'action de rang égal : aucun ne ressortait. Ils passent sous un seul
-     déclencheur secondaire. */
-  const [cvOpen, setCvOpen] = useState(false);
-  const cvRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!cvOpen) return;
-    const onPointerDown = (e: MouseEvent) => {
-      if (cvRef.current && !cvRef.current.contains(e.target as Node)) setCvOpen(false);
-    };
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setCvOpen(false);
-    };
-    document.addEventListener("mousedown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [cvOpen]);
 
   return (
     <section id="hero" className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-24">
@@ -92,14 +72,18 @@ export default function Hero() {
           Tchapda Pieme
         </h1>
 
-        {/* Rôles sur une ligne séparée par des points médians plutôt qu'en
-            quatre pastilles — quatre pastilles se lisent comme des tags, une
-            ligne se lit comme un titre de poste. */}
-        <p className="mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.9375rem] font-medium text-[var(--t4)]">
-          {h.roles.map((role, i) => (
-            <span key={role} className="inline-flex items-center gap-2.5">
+        {/* Un intitulé revendiqué, en gras et à l'accent ; les trois axes en
+            dessous le précisent sans le concurrencer. Quatre titres de même rang
+            n'en faisaient valoir aucun. */}
+        <p className="mt-5 text-xl font-semibold tracking-[-0.015em]" style={{ color: "var(--accent-hi)" }}>
+          {h.title}
+        </p>
+
+        <p className="mt-2.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.9375rem] text-[var(--t2)]">
+          {h.focus.map((item, i) => (
+            <span key={item} className="inline-flex items-center gap-2.5">
               {i > 0 && <span aria-hidden="true" className="text-[var(--t3)]">·</span>}
-              {role}
+              {item}
             </span>
           ))}
         </p>
@@ -123,50 +107,14 @@ export default function Hero() {
             <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
           </a>
 
-          <div ref={cvRef} className="relative">
-            <button
-              type="button"
-              onClick={() => setCvOpen((o) => !o)}
-              aria-expanded={cvOpen}
-              aria-haspopup="menu"
-              className="inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium text-[var(--t4)] transition-colors duration-200 hover:text-[var(--t1)]"
-              style={{ borderColor: "var(--brdr2)", backgroundColor: "var(--surf)" }}
-            >
-              <DownloadIcon />
-              {h.cvDownload}
-              <svg
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${cvOpen ? "rotate-180" : ""}`}
-                fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-
-            {cvOpen && (
-              <div
-                role="menu"
-                className="absolute left-0 top-full z-20 mt-2 min-w-[13rem] overflow-hidden rounded-xl border shadow-xl"
-                style={{ backgroundColor: "var(--card)", borderColor: "var(--brdr2)", backdropFilter: "blur(12px)" }}
-              >
-                {([
-                  [CV_FILES.fintech,   h.cvFintech],
-                  [CV_FILES.fullstack, h.cvFullstack],
-                ] as const).map(([href, label]) => (
-                  <a
-                    key={href}
-                    href={href}
-                    download
-                    role="menuitem"
-                    onClick={() => setCvOpen(false)}
-                    className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[var(--t2)] transition-colors hover:bg-[var(--surf)] hover:text-[var(--t1)]"
-                  >
-                    <DownloadIcon className="w-3.5 h-3.5" />
-                    {label}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
+          <a
+            href={CV_BY_LANG[lang]}
+            download
+            className="btn-ghost inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-medium"
+          >
+            <DownloadIcon />
+            {h.cvDownload}
+          </a>
         </div>
 
         {/* Preuves chiffrées : la partie que l'on scanne avant de lire la bio. */}

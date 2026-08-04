@@ -42,7 +42,7 @@ export default function Experience() {
   return (
     <section id="experience" className="py-24 md:py-28">
       <div className="shell">
-        <SectionHeader label={e.label} title={e.title} />
+        <SectionHeader label={e.label} title={e.title} lead={e.description} />
 
         {/* Rail unique à gauche. L'alternance gauche / droite obligeait l'œil à
             zigzaguer entre deux colonnes pour suivre une chronologie qui, elle,
@@ -76,8 +76,16 @@ export default function Experience() {
                   <div className="flex items-start gap-3.5">
                     <CompanyLogo name={exp.company} color={exp.accentColor} />
                     <div className="min-w-0 flex-1">
-                      <h3 className="card-title">{exp.role}</h3>
-                      <p className="mt-1 text-sm leading-snug text-[var(--t2)]">
+                      {/* Le format est affiché à côté du poste. Trois périodes se
+                          chevauchant sans mention de stage, d'alternance ou de
+                          projet encadré se lisaient comme trois emplois
+                          simultanés — la première hypothèse du lecteur était
+                          alors l'exagération. */}
+                      <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
+                        <h3 className="card-title">{exp.role}</h3>
+                        <span className="pill">{exp.format}</span>
+                      </div>
+                      <p className="mt-1.5 text-sm leading-snug text-[var(--t2)]">
                         <span className="font-medium text-[var(--t4)]">{exp.company}</span>
                         <span className="text-[var(--t3)]"> · {exp.location}</span>
                       </p>

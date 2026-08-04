@@ -17,7 +17,7 @@ const MoonIcon = () => (
   </svg>
 );
 
-const SECTION_IDS = ["hero", "skills", "projects", "experience", "about", "contact"] as const;
+const SECTION_IDS = ["hero", "projects", "experience", "skills", "about", "contact"] as const;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,9 +31,9 @@ export default function Navbar() {
 
   const navLinks = [
     { label: t.nav.home,       id: "hero" },
-    { label: t.nav.skills,     id: "skills" },
     { label: t.nav.projects,   id: "projects" },
     { label: t.nav.experience, id: "experience" },
+    { label: t.nav.skills,     id: "skills" },
     { label: t.nav.about,      id: "about" },
     { label: t.nav.contact,    id: "contact" },
   ];

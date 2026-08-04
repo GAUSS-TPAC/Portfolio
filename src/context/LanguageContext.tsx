@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
-import { Lang, translations, Translation } from "@/i18n/translations";
+import { HTML_LANG, Lang, translations, Translation } from "@/i18n/translations";
 
 interface LangCtx {
   lang: Lang;
@@ -17,6 +17,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem("lang") as Lang | null;
     if (saved && saved in translations) setLangState(saved);
   }, []);
+
+  /* L'attribut `lang` du document suit la langue affichée. Il était figé sur
+     "fr" : un lecteur d'écran prononçait donc le contenu anglais avec les règles
+     du français, et les moteurs indexaient la page sous la mauvaise langue. */
+  useEffect(() => {
+    document.documentElement.lang = HTML_LANG[lang];
+  }, [lang]);
 
   const setLang = (l: Lang) => {
     setLangState(l);

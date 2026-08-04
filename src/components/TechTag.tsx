@@ -38,22 +38,48 @@ const TECH_ICON_SLUGS: Record<string, string> = {
   "Pandas":                "pandas",
   "scikit-learn":          "scikitlearn",
   "Power BI":              "powerbi",
+  "Kafka":                 "apachekafka",
+  "Redis":                 "redis",
+  "Express":               "express",
+  "SQLite":                "sqlite",
+  "Flask":                 "flask",
+  "C":                     "c",
+  // Sans logo assumé : NLP, Séries temporelles, RBAC, OAuth2 et Agile ne sont
+  // pas des produits. La pastille s'affiche alors en texte seul.
 };
+
+/* Marques dont la couleur officielle est quasi noire : sur les cartes sombres,
+   leur logo disparaissait purement et simplement, laissant un blanc avant le
+   nom. Le CDN accepte une couleur en suffixe — on leur impose donc un gris
+   neutre, lisible sur les deux thèmes. */
+const DARK_LOGOS = new Set([
+  "nextdotjs", "express", "flask", "apachekafka", "django",
+  "sqlite", "jsonwebtokens", "socketdotio", "pandas", "railway",
+]);
+const NEUTRAL = "94a3b8";
 
 export default function TechTag({ name }: { name: string }) {
   const slug = TECH_ICON_SLUGS[name];
+  const src = slug
+    ? `https://cdn.simpleicons.org/${slug}${DARK_LOGOS.has(slug) ? `/${NEUTRAL}` : ""}`
+    : null;
 
   return (
     <span className="tag">
-      {slug && (
+      {src && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={`https://cdn.simpleicons.org/${slug}`}
+          src={src}
           alt=""
           aria-hidden="true"
           loading="lazy"
           width={12}
           height={12}
+          /* Simple Icons a retiré certaines marques de son catalogue (Java,
+             Power BI…) : la requête échoue et laissait un blanc avant le nom.
+             On efface l'image plutôt que de tenir à jour la liste de ce que le
+             CDN héberge encore. */
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
           className="tech-icon h-3 w-3"
         />
       )}

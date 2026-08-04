@@ -4,12 +4,6 @@ import { useLanguage } from "@/context/LanguageContext";
 import SectionHeader from "./SectionHeader";
 import TechTag from "./TechTag";
 
-const CodeIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-  </svg>
-);
-
 const MonitorIcon = () => (
   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
     <rect x="2" y="3" width="20" height="14" rx="2" strokeWidth={1.8} />
@@ -40,19 +34,11 @@ const DatabaseIcon = () => (
   </svg>
 );
 
-const ShieldIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-  </svg>
-);
-
 const SKILL_ICONS: Record<string, JSX.Element> = {
-  langs:  <CodeIcon />,
-  front:  <MonitorIcon />,
-  back:   <ServerIcon />,
-  data:   <CpuIcon />,
-  db:     <DatabaseIcon />,
-  devops: <ShieldIcon />,
+  data:  <CpuIcon />,
+  back:  <ServerIcon />,
+  front: <MonitorIcon />,
+  infra: <DatabaseIcon />,
 };
 
 export default function Skills() {
@@ -64,7 +50,9 @@ export default function Skills() {
       <div className="shell">
         <SectionHeader label={s.label} title={s.title} lead={s.description} />
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {/* Quatre catégories : une grille 2×2 les tient sans laisser de case
+            vide, ce que faisait la grille en trois colonnes. */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {s.categories.map((cat, i) => (
             <div
               key={cat.id}

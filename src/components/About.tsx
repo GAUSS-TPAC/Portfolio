@@ -35,12 +35,8 @@ const certifications: { title: string; issuer: string; year: string; icon: JSX.E
   { title: "Prompt Engineering — Generative AI", issuer: "LinkedIn Learning",            year: "2024", icon: <LightbulbIcon /> },
 ];
 
-const FRENCH_NAMES: Record<Lang, string> = {
-  fr: "Français", en: "French", zh: "法语", es: "Francés", de: "Französisch",
-};
-const ENGLISH_NAMES: Record<Lang, string> = {
-  fr: "Anglais", en: "English", zh: "英语", es: "Inglés", de: "Englisch",
-};
+const FRENCH_NAMES: Record<Lang, string> = { fr: "Français", en: "French" };
+const ENGLISH_NAMES: Record<Lang, string> = { fr: "Anglais", en: "English" };
 
 export default function About() {
   const { t, lang } = useLanguage();
