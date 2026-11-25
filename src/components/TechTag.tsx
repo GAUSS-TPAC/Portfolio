@@ -44,8 +44,14 @@ const TECH_ICON_SLUGS: Record<string, string> = {
   "SQLite":                "sqlite",
   "Flask":                 "flask",
   "C":                     "c",
-  // Sans logo assumé : NLP, Séries temporelles, RBAC, OAuth2 et Agile ne sont
-  // pas des produits. La pastille s'affiche alors en texte seul.
+  "PyTorch":               "pytorch",
+  "NumPy":                 "numpy",
+  "Hugging Face Transformers": "huggingface",
+  "Transformers":          "huggingface",
+  "MCP":                   "modelcontextprotocol",
+  "WhatsApp":              "whatsapp",
+  // Sans logo assumé : NLP, LLM, RAG, Séries temporelles, RBAC, OAuth2… ne
+  // sont pas des produits. La pastille s'affiche alors en texte seul.
 };
 
 /* Marques dont la couleur officielle est quasi noire : sur les cartes sombres,

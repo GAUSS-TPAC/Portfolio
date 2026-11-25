@@ -4,9 +4,9 @@ import ScrollAnimations from "@/components/ScrollAnimations";
 import { Providers } from "./providers";
 import { SITE_URL } from "@/lib/site";
 
-const TITLE = "Alan Chanel Tchapda | ML & Data Engineer";
+const TITLE = "Alan Chanel Tchapda | Ingénieur IA / ML";
 const DESCRIPTION =
-  "Je construis les chaînes qui amènent la donnée jusqu'au modèle : ingestion, transformation, mise en production. Élève ingénieur à l'ENSP, deux ans de livraison en production sur des API et des plateformes de données.";
+  "Ingénieur IA / ML : je conçois des solutions d'intelligence artificielle de bout en bout, de la donnée brute au modèle en production — machine learning, NLP, vision par ordinateur et agents LLM. Élève ingénieur en dernière année à l'ENSP.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -14,14 +14,16 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   keywords: [
     "Alan Tchapda",
+    "AI Engineer",
     "ML Engineer",
-    "Data Engineer",
-    "Data Scientist",
-    "pipeline de données",
+    "Ingénieur IA",
     "machine learning",
+    "NLP",
+    "vision par ordinateur",
+    "LLM",
+    "RAG",
+    "agents IA",
     "Python",
-    "Spring Boot",
-    "Next.js",
     "portfolio",
     "Yaoundé",
     "Cameroun",
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Alan Chanel Tchapda Pieme — ML & Data Engineer",
+        alt: "Alan Chanel Tchapda Pieme — Ingénieur IA / ML",
       },
     ],
   },

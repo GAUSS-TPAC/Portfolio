@@ -35,10 +35,10 @@ const DatabaseIcon = () => (
 );
 
 const SKILL_ICONS: Record<string, JSX.Element> = {
-  data:  <CpuIcon />,
-  back:  <ServerIcon />,
-  front: <MonitorIcon />,
-  infra: <DatabaseIcon />,
+  ai:     <CpuIcon />,
+  vision: <MonitorIcon />,
+  data:   <DatabaseIcon />,
+  eng:    <ServerIcon />,
 };
 
 export default function Skills() {

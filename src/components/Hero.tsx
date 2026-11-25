@@ -18,8 +18,8 @@ const PinIcon = () => (
    téléchargement côte à côte demandaient au visiteur d'arbitrer entre deux
    versions de la même personne — un arbitrage qui n'est pas le sien. */
 const CV_BY_LANG = {
-  fr: "/alan-tchapda-cv-fintech-fr.pdf",
-  en: "/alan-tchapda-cv-fullstack-en.pdf",
+  fr: "/cv/alan-tchapda-cv-ia-ml-fr.pdf",
+  en: "/cv/alan-tchapda-cv-ai-ml-en.pdf",
 } as const;
 
 export default function Hero() {

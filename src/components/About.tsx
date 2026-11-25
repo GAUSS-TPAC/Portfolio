@@ -28,8 +28,15 @@ const LightbulbIcon = () => (
   </svg>
 );
 
+const SparkIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z" />
+  </svg>
+);
+
 const certifications: { title: string; issuer: string; year: string; icon: JSX.Element }[] = [
-  { title: "OCI — AI Foundation Associate",      issuer: "Oracle Cloud Infrastructure", year: "2025", icon: <CloudIcon /> },
+  { title: "AI Cohort 10",                       issuer: "TRI",                          year: "2026", icon: <SparkIcon /> },
+  { title: "OCI — AI Foundations Associate",     issuer: "Oracle Cloud Infrastructure", year: "2025", icon: <CloudIcon /> },
   { title: "OCI — Data Science Professional",    issuer: "Oracle Cloud Infrastructure", year: "2025", icon: <ChartIcon /> },
   { title: "IoT & Cloud Computing",              issuer: "Yonsei University / Coursera", year: "2024", icon: <WifiIcon /> },
   { title: "Prompt Engineering — Generative AI", issuer: "LinkedIn Learning",            year: "2024", icon: <LightbulbIcon /> },
