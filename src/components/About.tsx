@@ -66,13 +66,29 @@ export default function About() {
             <div className="space-y-3">
               {a.education.map((edu) => (
                 <article key={edu.degree} className="card card-hover p-5">
-                  <div className="mb-2 flex items-start justify-between gap-3">
-                    <h4 className="card-title flex-1">{edu.degree}</h4>
-                    <span className="pill shrink-0">{edu.status}</span>
+                  <div className="flex items-start gap-3.5">
+                    {/* Fond blanc fixe : les deux sceaux sont dessinés pour un
+                        fond clair, et celui de l'Université de Yaoundé I, tracé
+                        en noir, disparaîtrait sur le thème sombre. */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={edu.logo}
+                      alt={edu.school}
+                      loading="lazy"
+                      className="h-12 w-12 shrink-0 rounded-lg bg-white object-contain p-1"
+                      style={{ border: "1px solid var(--brdr2)" }}
+                      onError={(e) => { e.currentTarget.style.display = "none"; }}
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-2 flex items-start justify-between gap-3">
+                        <h4 className="card-title flex-1">{edu.degree}</h4>
+                        <span className="pill shrink-0">{edu.status}</span>
+                      </div>
+                      <p className="text-sm font-medium text-[var(--t4)]">{edu.school}</p>
+                      <p className="meta mt-1 mb-3">{edu.period}</p>
+                      <p className="body-sm">{edu.details}</p>
+                    </div>
                   </div>
-                  <p className="text-sm font-medium text-[var(--t4)]">{edu.school}</p>
-                  <p className="meta mt-1 mb-3">{edu.period}</p>
-                  <p className="body-sm">{edu.details}</p>
                 </article>
               ))}
             </div>

@@ -233,6 +233,7 @@ export const translations = {
         {
           degree: "Diplôme d'Ingénieur — Génie informatique",
           school: "École Nationale Supérieure Polytechnique de Yaoundé (ENSP)",
+          logo: "/logo-enspy.png",
           period: "Sept. 2024 – 2027",
           status: "En cours",
           details: "Dernière année. Algorithmes & Complexité, Systèmes Distribués, Intelligence Artificielle, Sécurité Réseau, Architecture Logicielle.",
@@ -240,6 +241,7 @@ export const translations = {
         {
           degree: "DEUG — Mathématiques",
           school: "Université de Yaoundé I",
+          logo: "/logo-uy1.png",
           period: "Sept. 2022 – 2024",
           status: "Obtenu",
           details: "Probabilités & Statistiques, Algèbre Linéaire, Équations Différentielles, Analyse Numérique — socle de la modélisation statistique et du machine learning.",
@@ -492,6 +494,7 @@ export const translations = {
         {
           degree: "Engineering Degree — Computer Engineering",
           school: "National Advanced School of Engineering, Yaoundé (ENSP)",
+          logo: "/logo-enspy.png",
           period: "Sept 2024 – 2027",
           status: "In progress",
           details: "Final year. Algorithms & Complexity, Distributed Systems, Artificial Intelligence, Network Security, Software Architecture.",
@@ -499,6 +502,7 @@ export const translations = {
         {
           degree: "DEUG — Mathematics",
           school: "University of Yaoundé I",
+          logo: "/logo-uy1.png",
           period: "Sept 2022 – 2024",
           status: "Completed",
           details: "Probability & Statistics, Linear Algebra, Differential Equations, Numerical Analysis — the foundation for statistical modelling and machine learning.",
